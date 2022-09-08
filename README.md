@@ -48,6 +48,6 @@ npx hardhat run scripts/deployRoboPunksNFT.js --network rinkeby    --部署合�
 
 6、项目根目录下执行命令 "npm run start" 来运行项目
 
-7、如果要铸币，需要先打开铸币功能，设置部署的合约上的 "isPublicMintEnabled" 参数 为true
+7、如果要铸币，需要先打开铸币功能，设置部署的合约上的 "isPublicMintEnabled" 参数 为true；但是这需要成功执行验证合约的命令 "npx hardhat verify --network rinkeby 合约地址" 后才能直接在etherscan上修改参数；如果无法成功执行验证合约的命令的话，可以考虑在合约代码里就把 isPublicMintEnabled 设置为 true，具体操作是在 RoboPunksNFT.sol 的构造函数 constructor() 中给变量 isPublicMintEnabled 赋值为 true，部署这一份新合约
 
 8、由于字体资源是在线加载的谷歌的字体，因此需要科学上网，否则的话页面显示的字体样式可能与示例不一样
