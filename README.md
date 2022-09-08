@@ -1,70 +1,53 @@
-# Getting Started with Create React App
+# NFT Mint网站搭建(Hardhat+React)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+视频教程地址(两个教程是一样的，bilibili那个是搬运的youtube视频)：
 
-## Available Scripts
+youtube:https://www.youtube.com/watch?v=ynFNLBP2TPs
 
-In the project directory, you can run:
+bilibili:https://www.bilibili.com/video/BV1G3411G7k5
 
-### `npm start`
+项目实际运行图：(chakra-ui组件没有生效，不清楚为什么，有可能是chakra-ui package的版本原因)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![](.\image\Snipaste_2022-09-09_02-21-53.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+教程里正确的样式应该是这样的：
 
-### `npm test`
+![](.\image\Snipaste_2022-09-09_02-27-23.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1、环境：node v14.0.0; npm 6.14.4; 使用框架：hardhat-合约开发 + react-前端编写
 
-### `npm run build`
+2、合约代码位置：contracts/RoboPunksNFT.sol
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3、部署脚本位置：scripts/deployRoboPunksNFT.js
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+4、配置文件：在项目根目录下添加名为“.env”的配置文件，文件内容(注意：下面的内容是不可用的，需要根据自己具体情况填写，下面只是示例；实际文件中需要将 //注释删除，这里注释只是为了说明每个配置项是什么)：
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```javascript
+REACT_APP_RINKEBY_RPC_URL='https://rinkeby.infura.io/v3/5affffff684aaaaab9xxxx609c9a2d'//在infura申请的rinkeby访问url
+REACT_APP_ETHERSCAN_KEY='6VHaaaaRaaaaaTKHxxxxxxxxB2C4444448S'//在etherscan申请的API访问KEY
+REACT_APP_PRIVATE_KEY='a862aaaaaaaaaae35482e44444447f4c8d8eaxxxxxxxxxx76b7ecggc456'//自己的钱包私钥
+```
 
-### `npm run eject`
+这些配置在项目根目录下的hardhat.config.js中被使用到
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+5、在项目根目录下执行以下命令，编译与部署合约：
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
+npx hardhat clean
+npx hardhat compile    --编译solidity合约代码
+npx hardhat run scripts/deployRoboPunksNFT.js --network rinkeby    --部署合约，--network指定测试网络为rinkeby，网络相关配置在根目录下的hardhat.config.js中。(注意：这一步有可能需要科学上网)
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![](.\image\image-20220907000558132.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+在rinkeby测试网的etherscan上可以查看到部署的合约信息
 
-## Learn More
+![](.\image\image-20220907001649686.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+(视频教程中还执行了命令：npx hardhat verify --network rinkeby 0x5E8F981b463208BffBa90775dAA2aBd2725b17f4 [这个参数是部署的合约地址]来验证合约，但是实际操作时会返回网络错误。应该不执行这个命令也没有什么问题，因为这个命令好像是为了验证合约代码，然后合约代码可以直接在etherscan上查看，这样的话，即使合约代码查看不了应该也没关系，只要不影响到合约执行就可以)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+6、项目根目录下执行命令 "npm run start" 来运行项目
 
-### Code Splitting
+7、如果要铸币，需要先打开铸币功能，设置部署的合约上的 "isPublicMintEnabled" 参数 为true
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+8、由于字体资源是在线加载的谷歌的字体，因此需要科学上网，否则的话页面显示的字体样式可能与示例不一样
