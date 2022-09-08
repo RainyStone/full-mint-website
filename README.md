@@ -8,11 +8,11 @@ bilibili:https://www.bilibili.com/video/BV1G3411G7k5
 
 项目实际运行图：(chakra-ui组件没有生效，不清楚为什么，有可能是chakra-ui package的版本原因)
 
-![](.\image\Snipaste_2022-09-09_02-21-53.png)
+![](./image/Snipaste_2022-09-09_02-21-53.png)
 
 教程里正确的样式应该是这样的：
 
-![](.\image\Snipaste_2022-09-09_02-27-23.png)
+![](./image/Snipaste_2022-09-09_02-27-23.png)
 
 1、环境：node v14.0.0; npm 6.14.4; 使用框架：hardhat-合约开发 + react-前端编写
 
@@ -38,11 +38,11 @@ npx hardhat compile    --编译solidity合约代码
 npx hardhat run scripts/deployRoboPunksNFT.js --network rinkeby    --部署合约，--network指定测试网络为rinkeby，网络相关配置在根目录下的hardhat.config.js中。(注意：这一步有可能需要科学上网)
 ```
 
-![](.\image\image-20220907000558132.png)
+![](./image/image-20220907000558132.png)
 
 在rinkeby测试网的etherscan上可以查看到部署的合约信息
 
-![](.\image\image-20220907001649686.png)
+![](./image/image-20220907001649686.png)
 
 (视频教程中还执行了命令：npx hardhat verify --network rinkeby 0x5E8F981b463208BffBa90775dAA2aBd2725b17f4 [这个参数是部署的合约地址]来验证合约，但是实际操作时会返回网络错误。应该不执行这个命令也没有什么问题，因为这个命令好像是为了验证合约代码，然后合约代码可以直接在etherscan上查看，这样的话，即使合约代码查看不了应该也没关系，只要不影响到合约执行就可以)
 
